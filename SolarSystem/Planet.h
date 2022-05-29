@@ -1,4 +1,6 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+#include <math.h>
 class Planet
 {
 private:
@@ -7,7 +9,7 @@ private:
 	float* x;
 	float* y;
 public:
-	Planet(float x, float y, float M, float R);
+	bool isSun = false;
+	Planet(float xPos, float yPos, float Mass, float Radius, bool isSun);
 	~Planet();
 };
-
