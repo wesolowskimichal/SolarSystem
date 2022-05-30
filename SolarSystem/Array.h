@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 template<typename T>
 class Array{
 private:
@@ -8,6 +9,7 @@ public:
 	Array();
 	Array(unsigned int size);
 	~Array();
-	void push(T* obj);
+	void push(T obj);
+	T get(unsigned int id);
 };
 
