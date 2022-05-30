@@ -9,12 +9,6 @@ int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Solar System");
-    sf::Vertex lines[] = {
-        sf::Vertex(sf::Vector2f(0, HEIGHT / 2.f)),
-        sf::Vertex(sf::Vector2f(WIDTH, HEIGHT / 2.f)),
-        sf::Vertex(sf::Vector2f(WIDTH / 2.f,0)),
-        sf::Vertex(sf::Vector2f(WIDTH / 2.f,HEIGHT*100))
-    };
     Planet* Sun = new Planet(0, 0, 1.989 * pow(10, 30), 16.f, 1, 240, 10, 50);   //radius 696340
     Planet* Mercury = new Planet(0.39*Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
     Planet* Venus = new Planet(0.72 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
@@ -45,11 +39,10 @@ int main()
                 window.close();
             if (event.type == sf::Event::Resized)
             {
-                //sf::FloatRect visibleArea(0.f, 0.f, event.size.width, event.size.height);
-                //view.setViewport(sf::FloatRect(abs(x1-event.size.width), abs(y1-event.size.height), event.size.width, event.size.height));
-                view.setViewport(sf::FloatRect(0.f, 0.f, event.size.width, event.size.height));
-                window.setView(view);
+                sf::FloatRect visibleArea(0.f, 0.f, event.size.width, event.size.height);
+                window.setView(sf::View(visibleArea));
             }
+            
             if (event.type == sf::Event::MouseButtonPressed) {
                 mPosX = sf::Mouse::getPosition(window).x;
                 mPosY = sf::Mouse::getPosition(window).y;
@@ -57,20 +50,23 @@ int main()
             if (event.type == sf::Event::MouseButtonReleased) {
                 float mPosXN = sf::Mouse::getPosition(window).x;
                 float mPosYN = sf::Mouse::getPosition(window).y;
-                view.move(mPosX + (mPosX - mPosXN), mPosY + (mPosY - mPosYN));
+                view.move(mPosX - mPosXN, mPosY - mPosYN);
+                std::cout << mPosX << ' ' << mPosXN << ' ' << mPosX + (mPosX - mPosXN) << std::endl;
+                std::cout << mPosY << ' ' << mPosYN << ' ' << mPosY + (mPosY - mPosYN) << std::endl;
                 window.setView(view);
+                
             }
+
             if (event.type == sf::Event::MouseWheelScrolled)
             {
                 if (event.mouseWheelScroll.delta > 0)
                     view.zoom(0.5);
                 if (event.mouseWheelScroll.delta < 0)
-                    view.zoom(-0.5);
+                    view.zoom(1.5);
                 window.setView(view);
             }
         }
         window.clear();
-        window.draw(lines, 4, sf::Lines);
         for (auto _p : _planets)
             window.draw(_p);
         window.display();
