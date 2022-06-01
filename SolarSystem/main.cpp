@@ -3,8 +3,9 @@
 #include <iostream>
 #include <SFML/System/Clock.hpp>
 //#include "Array.h"
-#define WIDTH 1920.f
-#define HEIGHT 1080.f
+float WIDTH = 1920.f;
+float HEIGHT = 1080.f;
+
 
 int updateX(sf::RenderWindow& window) {
     return sf::Mouse::getPosition(window).x;
@@ -31,18 +32,20 @@ bool moving(float x1, float x2, float y1, float y2) {
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Solar System");
-    Planet* Sun = new Planet(0, 0, 1.989 * pow(10, 30), 16.f, 1, 240, 10, 50);   //radius 696340
-    Planet* Mercury = new Planet(0.39*Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Venus = new Planet(0.72 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Earth = new Planet(1 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Mars = new Planet(1.52 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Jupiter = new Planet(5.20 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Saturn = new Planet(9.58 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Uranus = new Planet(19.20 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Neptune = new Planet(30.05 * Sun->AU, 0, 1, 6.f, 0, 0, 255, 0);
-    Planet* Pluto = new Planet(39.48 * Sun->AU, 0, 1, 6.f, 0, 255, 0, 0);
+    Planet* Sun = new Planet(0, 0, 1.989 * pow(10, 30), 280.f, 1, 240, 10, 50, 0);   //radius 696340
+    Planet* Mercury = new Planet((0.39 * Sun->AU) + Sun->getR(), 0, 1, 4.8f, 0, 0, 255, 255, Sun->getR());
+    /*Planet* Venus = new Planet(0.72 * Sun->AU, 0, 1, 12.0f, 0, 0, 255, 0);
+    Planet* Earth = new Planet(1 * Sun->AU, 0, 1, 12.8f, 0, 0, 255, 0);
+    Planet* Mars = new Planet(1.52 * Sun->AU, 0, 1, 8.f, 0, 0, 255, 0);
+    Planet* Jupiter = new Planet(5.20 * Sun->AU, 0, 1, 140.f, 0, 0, 255, 0);
+    Planet* Saturn = new Planet(9.58 * Sun->AU, 0, 1, 116.f, 0, 0, 255, 0);
+    Planet* Uranus = new Planet(19.20 * Sun->AU, 0, 1, 32.f, 0, 0, 255, 0);
+    Planet* Neptune = new Planet(30.05 * Sun->AU, 0, 1, 50.f, 0, 0, 255, 0);
+    Planet* Pluto = new Planet(39.48 * Sun->AU, 0, 1, 5.f, 0, 255, 0, 0);*/
 
-    std::vector<Planet*> Planets = { Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto };
+    //std::vector<Planet*> Planets = { Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto };
+        std::vector<Planet*> Planets = { Sun, Mercury};
+
     std::vector<sf::CircleShape> _planets;
     for (auto P : Planets)
         _planets.push_back(P->create());
@@ -86,30 +89,39 @@ int main()
             if (event.type == sf::Event::MouseButtonPressed) {
                 float xpos = sf::Mouse::getPosition().x;
                 float ypos = sf::Mouse::getPosition().y;
-                sf::View tempView = view;
                 while (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseMoved) {
                     if (moving(xpos, sf::Mouse::getPosition().x, ypos, sf::Mouse::getPosition().y)) {
-                        sf::FloatRect visibleArea(x1+(xpos - sf::Mouse::getPosition().x), y1+ (ypos - sf::Mouse::getPosition().y), x2+(xpos - sf::Mouse::getPosition().x), y2+ (ypos - sf::Mouse::getPosition().y));
-                        tempView = sf::View(visibleArea);
-                        window.setView(sf::View(visibleArea));
-                        
+                        sf::FloatRect visibleArea(x1+(xpos - sf::Mouse::getPosition().x), y1+(ypos - sf::Mouse::getPosition().y), WIDTH, HEIGHT);
+                        view = sf::View(visibleArea);
+                        window.setView(view);
+                        updateWindow(window, _planets);
                     }
-                    updateWindow(window, _planets);
                     window.pollEvent(event);
                 }
                 x1 += (xpos - sf::Mouse::getPosition().x);
                 y1 += (ypos - sf::Mouse::getPosition().y);
-                x2 += (xpos - sf::Mouse::getPosition().x);
-                y2 += (ypos - sf::Mouse::getPosition().y);
-                view = tempView;
             }
             
             if (event.type == sf::Event::MouseWheelScrolled)
             {
-                if (event.mouseWheelScroll.delta > 0)
-                    view.zoom(0.5);
-                if (event.mouseWheelScroll.delta < 0)
-                    view.zoom(1.5);
+                if (event.mouseWheelScroll.delta > 0) {
+                    WIDTH -= 160;
+                    HEIGHT -= 90;
+                    x1 += 80;
+                    y1 += 45;
+                    sf::FloatRect visibleArea(x1, y1, WIDTH, HEIGHT);
+                    view = sf::View(visibleArea);
+                    updateWindow(window, _planets);
+                }
+                if (event.mouseWheelScroll.delta < 0) {
+                    WIDTH += 160;
+                    HEIGHT += 90;
+                    x1 -= 80;
+                    y1 -= 45;
+                    sf::FloatRect visibleArea(x1, y1, WIDTH, HEIGHT);
+                    view = sf::View(visibleArea);
+                    updateWindow(window, _planets);
+                }
                 window.setView(view);
             }
         }

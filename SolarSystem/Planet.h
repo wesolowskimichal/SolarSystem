@@ -8,6 +8,7 @@ class Planet:
 private:
 	const float M;
 	const float R;
+	const float sunR;
 	float* x;
 	float* y;
 	const bool isSun = false;
@@ -17,7 +18,8 @@ public:
 	//const float SCALE = 250 / AU;
 	const float SCALE;
 
-	Planet(float xPos, float yPos, float Mass, float Radius, bool isSun, int Red, int Green, int Blue);
+	Planet(float xPos, float yPos, float Mass, float Radius, bool isSun, int Red, int Green, int Blue, float sunR);
 	~Planet();
 	sf::CircleShape create();
+	float getR();
 };

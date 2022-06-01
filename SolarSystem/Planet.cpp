@@ -1,12 +1,12 @@
 #include "Planet.h"
 #include <iostream>
-Planet::Planet(float xPos, float yPos, float Mass, float Radius, bool isSun, int Red, int Green, int Blue) : R(Radius), M(Mass), SCALE(250/AU), isSun(isSun), Color(Red, Green, Blue) {
+Planet::Planet(float xPos, float yPos, float Mass, float Radius, bool isSun, int Red, int Green, int Blue, float sunR) : R(Radius), M(Mass), SCALE(250/AU), isSun(isSun), sunR(sunR), Color(Red, Green, Blue) {
 	//this->x = new float((xPos - this->R) * this->SCALE + (1920 / 2));
 	//this->y = new float((yPos - this->R) * this->SCALE + (1080 / 2));
 	//this->x = new float(xPos * this->SCALE + ((1920 - 2*this->R) / 2));		GOOD
 	//this->y = new float(yPos * this->SCALE + ((1080 - 2*this->R) / 2));		GOOD
-	this->x = new float(xPos * this->SCALE + ((1920 - 2 * this->R) / 2));
-	this->y = new float(yPos * this->SCALE + ((1080 - 2 * this->R) / 2));
+	this->x = new float(xPos * this->SCALE + ((1920 - 2 * this->R) / 2) + sunR);
+	this->y = new float(yPos * this->SCALE + ((1080 - 2 * this->R) / 2) + sunR);
 }
 
 Planet::~Planet() {
@@ -20,4 +20,8 @@ sf::CircleShape Planet::create() {
 	_planet.setPosition(*x, *y);
 	std::cout << this->R << ' ' << *x << ' ' << *y<<std::endl;
 	return _planet;
+}
+
+float Planet::getR() {
+	return R;
 }
