@@ -32,19 +32,18 @@ bool moving(float x1, float x2, float y1, float y2) {
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Solar System");
-    Planet* Sun = new Planet(0, 0, 1.989 * pow(10, 30), 280.f, 1, 240, 10, 50, 0);   //radius 696340
-    Planet* Mercury = new Planet((0.39 * Sun->AU) + Sun->getR(), 0, 1, 4.8f, 0, 0, 255, 255, Sun->getR());
-    /*Planet* Venus = new Planet(0.72 * Sun->AU, 0, 1, 12.0f, 0, 0, 255, 0);
-    Planet* Earth = new Planet(1 * Sun->AU, 0, 1, 12.8f, 0, 0, 255, 0);
-    Planet* Mars = new Planet(1.52 * Sun->AU, 0, 1, 8.f, 0, 0, 255, 0);
-    Planet* Jupiter = new Planet(5.20 * Sun->AU, 0, 1, 140.f, 0, 0, 255, 0);
-    Planet* Saturn = new Planet(9.58 * Sun->AU, 0, 1, 116.f, 0, 0, 255, 0);
-    Planet* Uranus = new Planet(19.20 * Sun->AU, 0, 1, 32.f, 0, 0, 255, 0);
-    Planet* Neptune = new Planet(30.05 * Sun->AU, 0, 1, 50.f, 0, 0, 255, 0);
-    Planet* Pluto = new Planet(39.48 * Sun->AU, 0, 1, 5.f, 0, 255, 0, 0);*/
+    Planet* Sun = new Planet(0, 0, 1.989 * pow(10, 30), 280.f, 1, 252, 212, 64, 0);   //radius 696340
+    Planet* Mercury = new Planet(0.39 * Sun->AU, 0, 1, 4.8f, 0, 0, 255, 255, Sun->getR());
+    Planet* Venus = new Planet(0.72 * Sun->AU, 0, 1, 12.0f, 0, 0, 255, 0, Sun->getR());
+    Planet* Earth = new Planet(1 * Sun->AU, 0, 1, 12.8f, 0, 0, 255, 0, Sun->getR());
+    Planet* Mars = new Planet(1.52 * Sun->AU, 0, 1, 8.f, 0, 0, 255, 0, Sun->getR());
+    Planet* Jupiter = new Planet(5.20 * Sun->AU, 0, 1, 140.f, 0, 0, 255, 0, Sun->getR());
+    Planet* Saturn = new Planet(9.58 * Sun->AU, 0, 1, 116.f, 0, 0, 255, 0, Sun->getR());
+    Planet* Uranus = new Planet(19.20 * Sun->AU, 0, 1, 32.f, 0, 0, 255, 0, Sun->getR());
+    Planet* Neptune = new Planet(30.05 * Sun->AU, 0, 1, 50.f, 0, 0, 255, 0, Sun->getR());
+    Planet* Pluto = new Planet(39.48 * Sun->AU, 0, 1, 5.f, 0, 255, 0, 0, Sun->getR());
 
-    //std::vector<Planet*> Planets = { Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto };
-        std::vector<Planet*> Planets = { Sun, Mercury};
+    std::vector<Planet*> Planets = { Sun, Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto };
 
     std::vector<sf::CircleShape> _planets;
     for (auto P : Planets)

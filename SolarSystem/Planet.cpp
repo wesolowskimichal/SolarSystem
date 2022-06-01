@@ -6,7 +6,7 @@ Planet::Planet(float xPos, float yPos, float Mass, float Radius, bool isSun, int
 	//this->x = new float(xPos * this->SCALE + ((1920 - 2*this->R) / 2));		GOOD
 	//this->y = new float(yPos * this->SCALE + ((1080 - 2*this->R) / 2));		GOOD
 	this->x = new float(xPos * this->SCALE + ((1920 - 2 * this->R) / 2) + sunR);
-	this->y = new float(yPos * this->SCALE + ((1080 - 2 * this->R) / 2) + sunR);
+	this->y = new float(yPos * this->SCALE + ((1080 - 2 * this->R) / 2));
 }
 
 Planet::~Planet() {
