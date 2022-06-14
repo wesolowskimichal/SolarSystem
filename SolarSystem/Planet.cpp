@@ -7,9 +7,9 @@ Planet::Planet(float x, float y, float M, float R, std::string textureFile) :M(M
 	this->texture.setSmooth(true);
 	this->_planet.setTexture(&this->texture);
 	this->_planet.setRadius(this->R);
-	_planet.setPosition(x * this->SCALE + ((1920 - 2 * this->R) / 2), y * this->SCALE + ((1080 - 2 * this->R) / 2));
+	_planet.setPosition(x * SCALE + ((1920 - 2 * this->R) / 2), y * SCALE + ((1080 - 2 * this->R) / 2));
 	_planet.setPointCount(1000);
-	std::cout << this->R << ' ' << x << ' ' << y << ' ' << x * this->SCALE << std::endl;
+	std::cout << this->R << ' ' << x << ' ' << y << ' ' << x * SCALE << std::endl;
 }
 
 float Planet::getX() {
@@ -21,6 +21,10 @@ float Planet::getY() {
 
 float Planet::getM() {
 	return M;
+}
+
+float Planet::getR() {
+	return R;
 }
 
 sf::CircleShape Planet::getPlanet() {
@@ -65,5 +69,5 @@ void Planet::updatePos(std::vector<Planet*>planets) {
 }
 
 void Planet::movePlanet() {
-	_planet.setPosition(x * this->SCALE + ((1920 - 2 * this->R) / 2), y * this->SCALE + ((1080 - 2 * this->R) / 2));
+	_planet.setPosition(x * SCALE + ((1920 - 2 * this->R) / 2), y * SCALE + ((1080 - 2 * this->R) / 2));
 }

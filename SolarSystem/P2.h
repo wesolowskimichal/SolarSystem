@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Color.h"
 #include <math.h>
 #include <iostream>
 class P2{
