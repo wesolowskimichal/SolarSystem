@@ -154,15 +154,11 @@
     <ClCompile Include="constants.cpp" />
     <ClCompile Include="Legend.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Moon.cpp" />
-    <ClCompile Include="P2.cpp" />
     <ClCompile Include="Planet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
     <ClInclude Include="Legend.h" />
-    <ClInclude Include="Moon.h" />
-    <ClInclude Include="P2.h" />
     <ClInclude Include="Planet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
