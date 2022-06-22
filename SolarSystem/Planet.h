@@ -10,15 +10,12 @@ class Planet {
 private:
 	float x;
 	float y;
+	const float M;
+	const float R;
 	float xVel = 0.f;
 	float yVel = 0.f;
 	const std::string textureFile;
 	sf::Texture texture;
-	const float M;
-	const float R;
-	std::vector < std::pair<float, float>>orbitTrail;
-	std::vector < std::pair<float, float>>orbit;
-	bool completeOrbit = false;
 	sf::CircleShape _planet;
 
 public:

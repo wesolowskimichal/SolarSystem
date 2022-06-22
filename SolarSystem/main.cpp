@@ -1,9 +1,7 @@
 ﻿#include "constants.h"
 #include "Planet.h"
-#include <vector>
-#include <iostream>
-#include <SFML/System/Clock.hpp>
 #include "Legend.h"
+#include <vector>
 
 void updateWindow(sf::RenderWindow& window, std::vector<Planet*> _planets,  sf::Sprite bg, Legend* legend, float x1, float y1, float W) {
     window.clear();
